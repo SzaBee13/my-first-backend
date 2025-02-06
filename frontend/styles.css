@@ -52,6 +52,10 @@
 
 /* Messages */
 
+#messages {
+    padding-bottom: 70px;
+}
+
 .message {
     margin: 10px 0;
     overflow: hidden; /* Ensure content does not overflow */

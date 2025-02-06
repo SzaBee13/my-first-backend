@@ -24,7 +24,7 @@ socket.onmessage = event => {
 
     messageDiv.appendChild(authorSpan);
     messageDiv.appendChild(textSpan);
-    document.getElementById("chat").appendChild(messageDiv);
+    chat.appendChild(messageDiv);
 };
 
 function sendMessage() {

@@ -1,0 +1,125 @@
+* {
+    margin: 0;
+    padding: 0;
+    color: #fff;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+:root {
+    --chat-bg: #333333;
+}
+
+#container {
+    min-height: 100vh;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    background-color: gray;
+    flex-direction: column;
+}
+
+#h1 {
+    margin-top: 20px;
+}
+
+#chat {
+    margin: 20px;
+    border: 1px solid black;
+    padding: 10px;
+    border-radius: 10px;
+    width: 50vw;
+    min-height: 50vh;
+    background-color: var(--chat-bg);
+    position: relative;
+}
+
+#fullscreen {
+    display: flex;
+    background-color: var(--chat-bg);
+    z-index: 9999;
+    width: 100vw;
+    min-height: 100vh;
+    position: absolute;
+    top: 0;
+    align-items: center;
+    justify-content: center;  
+}
+
+#fullscreen > h1 {
+    position: relative;
+    top: -50px;
+}
+
+/* Messages */
+
+.message {
+    margin: 10px 0;
+    overflow: hidden; /* Ensure content does not overflow */
+}
+
+.message > .messageContent {
+    max-width: 100%; /* Ensure content does not exceed the width of the parent */
+    word-wrap: break-word; /* Break long words to prevent overflow */
+    overflow: hidden; /* Hide any overflowing content */
+}
+
+.message > .author {
+    font-size: larger;
+}
+
+/* From Uiverse.io by Maximinodotpy */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+button {
+    font-family: inherit;
+}
+
+.inputGroup {
+    font-family: "Segoe UI", sans-serif;
+    margin: 0;
+    /*max-width: 190px;*/
+    position: absolute;
+}
+
+#chat > .inputGroup {
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+}
+
+.inputGroup input {
+    font-size: 100%;
+    padding: 0.8em;
+    outline: none;
+    border: 2px solid rgb(200, 200, 200);
+    background-color: var(--chat-bg);
+    border-radius: 20px;
+    width: 100%;
+}
+
+.inputGroup label {
+    font-size: 100%;
+    position: absolute;
+    left: 0;
+    padding: 0.8em;
+    margin-left: 0.5em;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    color: #fff;
+    border-radius: 10px
+}
+
+.inputGroup :is(input:focus, input:valid) ~ label {
+    transform: translateY(-50%) scale(0.9);
+    margin: 0em;
+    margin-left: 1.3em;
+    padding: 0.4em;
+    background-color: var(--chat-bg);
+}
+
+.inputGroup :is(input:focus, input:valid) {
+    border-color: rgb(150, 150, 200);
+}

@@ -4,7 +4,7 @@ const fullScreenDiv = document.getElementById("fullscreen")
 const authorInput = document.getElementById("author")
 const lsAuthor = localStorage.getItem("author")
 
-const socket = new WebSocket("ws://192.168.13.129:3000");
+const socket = new WebSocket("https://my-first-backend-production.up.railway.app");
 
 let author;
 

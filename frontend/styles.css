@@ -128,7 +128,7 @@ button {
     border-color: rgb(150, 150, 200);
 }
 
-@media screen and (max-width: 640) {
+@media screen and (max-width: 640px) {
     #chat {
         width: 90vw;
     }

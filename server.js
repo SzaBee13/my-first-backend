@@ -52,6 +52,10 @@ server.on("connection", socket => {
         });
     };
 
-    broadcastOnlineCount()
-    broadcastMessage("server", "Server", "Welcome, you joined to the server!")
+    socket.send(JSON.stringify({
+        type: "message",
+        username: "server",
+        nickname: "Server",
+        text: "Welcome, you joined to the server!"
+    }));
 });

@@ -130,7 +130,12 @@ button {
     border-color: rgb(150, 150, 200);
 }
 
-
 #fullscreen > .inputGroup {
     position: relative;
+}
+
+@media screen and (max-width: 640px) {
+    #chat {
+        width: 90vw;
+    }
 }

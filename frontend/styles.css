@@ -18,8 +18,12 @@
     flex-direction: column;
 }
 
-#h1 {
+#header {
     margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 #chat {
@@ -34,20 +38,18 @@
 }
 
 #fullscreen {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
     display: flex;
     background-color: var(--chat-bg);
     z-index: 9999;
-    width: 100vw;
     min-height: 100vh;
-    position: absolute;
-    top: 0;
     align-items: center;
-    justify-content: center;  
-}
-
-#fullscreen > h1 {
-    position: relative;
-    top: -50px;
+    justify-content: center; 
+    flex-direction: column;
+    gap: 20px;
 }
 
 /* Messages */
@@ -126,4 +128,9 @@ button {
 
 .inputGroup :is(input:focus, input:valid) {
     border-color: rgb(150, 150, 200);
+}
+
+
+#fullscreen > .inputGroup {
+    position: relative;
 }

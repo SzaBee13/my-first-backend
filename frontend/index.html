@@ -8,7 +8,10 @@
 </head>
 <body>
     <div id="container">
-        <h1 id="h1">Welcome to chat</h1>
+        <div id="header">
+            <h1 id="h1">Welcome to chat</h1>
+            <p>Currently <span id="online">0</span> person is online</p>
+        </div>
         <div id="chat">
             <div id="messages">
                 <!-- There are the messages -->
@@ -21,11 +24,18 @@
     </div>
 
     <div id="fullscreen">
-        <h1>I'am: </h1>
+        <h1>Hi. Please tell us you nickname.</h1>
+        <h3>Nickname:</h3>
         <div class="inputGroup">
-            <input type="text" required="" autocomplete="off" id="author">
-            <label for="name">Message</label>
+            <input type="text" required="" autocomplete="off" id="nickname">
+            <label for="name">Nickname</label>
         </div>
+        <h3>Username: </h3>
+        <div class="inputGroup">
+            <input type="text" required="" autocomplete="off" id="username">
+            <label for="name">Username</label>
+        </div>
+        <h3 id="anwser"></h3>
     </div>
 
     <script src="./script.js"></script>

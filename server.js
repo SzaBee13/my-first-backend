@@ -1,7 +1,16 @@
 const WebSocket = require("ws");
+const sqlite3 = require("sqlite3").verbose();
+const path = require("path");
 
-const server = new WebSocket.Server({ port: 3000 });
-const usernames = new Set();
+// Open (or create) the database
+const db = new sqlite3.Database(path.join(__dirname, "usernames.db"));
+
+// Create the users table if it doesn't exist
+db.run(`CREATE TABLE IF NOT EXISTS users (
+    username TEXT PRIMARY KEY
+)`);
+
+const server = new WebSocket.Server({ port: 3100 });
 
 let onlines = 0;
 
@@ -13,14 +22,27 @@ server.on("connection", socket => {
         const data = JSON.parse(message.toString());
 
         if (data.type === "register") {
-            if (usernames.has(data.username)) {
-                socket.send(JSON.stringify({ type: "register", success: false, message: "Username already taken" }));
-            } else {
-                usernames.add(data.username);
-                socket.username = data.username;
-                socket.send(JSON.stringify({ type: "register", success: true, message: "Registration successful" }));
-                broadcastOnlineCount();
-            }
+            // Check if username exists in DB
+            db.get("SELECT username FROM users WHERE username = ?", [data.username], (err, row) => {
+                if (err) {
+                    socket.send(JSON.stringify({ type: "register", success: false, message: "DB error" }));
+                    return;
+                }
+                if (row) {
+                    socket.send(JSON.stringify({ type: "register", success: false, message: "Username already taken" }));
+                } else {
+                    // Insert new username
+                    db.run("INSERT INTO users(username) VALUES(?)", [data.username], err => {
+                        if (err) {
+                            socket.send(JSON.stringify({ type: "register", success: false, message: "DB error" }));
+                        } else {
+                            socket.username = data.username;
+                            socket.send(JSON.stringify({ type: "register", success: true, message: "Registration successful" }));
+                            broadcastOnlineCount();
+                        }
+                    });
+                }
+            });
         } else if (data.type === "message") {
             console.log(`Üzenet érkezett (${data.username}): ${data.text}`);
             broadcastMessage(data.username, data.nickname, data.text);
@@ -28,10 +50,11 @@ server.on("connection", socket => {
     });
 
     socket.on("close", () => {
-        onlines -= 1
+        onlines -= 1;
+        // Optionally, remove username from DB here if you want
     });
 
-    const broadcastMessage = (username, nickname,text) => {
+    const broadcastMessage = (username, nickname, text) => {
         server.clients.forEach(client => {
             if (client.readyState === WebSocket.OPEN) {
                 client.send(JSON.stringify({

@@ -44,7 +44,7 @@ server.on("connection", socket => {
                 }
             });
         } else if (data.type === "message") {
-            if (!socket.username) {
+            if (!data.username) {
                 socket.send(JSON.stringify({ type: "message", username: "server", nickname: "Server", text: "You must register first!" }));
                 return;
             }

@@ -8,7 +8,7 @@ const lsUsername = localStorage.getItem("username");
 const lsNickname = localStorage.getItem("nickname");
 
 // const socket = new WebSocket("http://192.168.126.1:3000");
-const socket = new WebSocket("https://chat-szb.pagekite.me");
+const socket = new WebSocket("https://chat-szabfun.onrender.com");
 
 let username;
 let nickname;

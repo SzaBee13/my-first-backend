@@ -1,0 +1,7 @@
+services:
+  app:
+    build: .
+    ports:
+      - "3100:3100"
+    volumes:
+      - ./usernames.db:/app/usernames.db
